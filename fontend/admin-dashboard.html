@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Campus Help Desk</title>
+    <link rel="stylesheet" href="css/admin-dashboard.css">
+</head>
+<body>
+
+    <div class="admin-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">CH</div>
+                <div>
+                    <h2>Campus Help Desk</h2>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-menu">
+                <a href="admin-dashboard.html" class="active">▦ Dashboard</a>
+                <a href="#complaints">▤ All Complaints</a>
+                <a href="#complaints">◷ Pending Complaints</a>
+                <a href="#complaints">✓ Resolved Complaints</a>
+                <a href="chatbot.html">✦ AI Assistant</a>
+                <a href="login.html" class="logout-link">↪ Logout</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Campus Help Desk</p>
+                <span>Admin Management System</span>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- Top Header -->
+            <header class="top-header">
+                <div>
+                    <h1>Admin Dashboard</h1>
+                    <p>Manage and monitor campus complaints</p>
+                </div>
+
+                <div class="admin-profile">
+                    <div class="admin-avatar">A</div>
+                    <div>
+                        <h3>Administrator</h3>
+                        <span>Help Desk Staff</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div>
+                    <h2>Welcome, Administrator! 👋</h2>
+                    <p>Here's an overview of campus complaints and requests.</p>
+                </div>
+                <div class="today-date" id="todayDate"></div>
+            </section>
+
+            <!-- Summary Cards -->
+            <section class="stats-grid">
+
+                <div class="stat-card total-card">
+                    <div class="stat-icon">▤</div>
+                    <div>
+                        <p>Total Complaints</p>
+                        <h2 id="totalCount">3</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card pending-card">
+                    <div class="stat-icon">◷</div>
+                    <div>
+                        <p>Pending</p>
+                        <h2 id="pendingCount">1</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card progress-card">
+                    <div class="stat-icon">⟳</div>
+                    <div>
+                        <p>In Progress</p>
+                        <h2 id="progressCount">1</h2>
+                    </div>
+                </div>
+
+                <div class="stat-card resolved-card">
+                    <div class="stat-icon">✓</div>
+                    <div>
+                        <p>Resolved</p>
+                        <h2 id="resolvedCount">1</h2>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Complaints Table -->
+            <section class="complaints-section" id="complaints">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Manage Complaints</h2>
+                        <p>View and update student complaints</p>
+                    </div>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="table-controls">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search complaints..."
+                    >
+
+                    <select id="statusFilter">
+                        <option value="All">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Complaint ID</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Priority</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Update Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="complaintTableBody">
+                            <!-- Complaint records will be added using JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="table-note">
+                    Note: These are sample complaint records for demonstration.
+                </p>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/admin-dashboard.js"></script>
+</body>
+</html>

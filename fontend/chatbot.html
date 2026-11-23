@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Help Assistant | Campus Help Desk</title>
+    <link rel="stylesheet" href="css/chatbot.css">
+</head>
+<body>
+
+    <div class="chatbot-container">
+
+        <!-- Chatbot Header -->
+        <header class="chat-header">
+            <a href="dashboard.html" class="back-btn">←</a>
+
+            <div class="bot-profile">
+                <div class="bot-icon">AI</div>
+                <div>
+                    <h2>Campus Help Assistant</h2>
+                    <p><span class="online-dot"></span> Online Assistant</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Chat Area -->
+        <main class="chat-area" id="chatArea">
+
+            <div class="date-label">Today</div>
+
+            <div class="message bot-message">
+                <div class="message-avatar">AI</div>
+                <div class="message-content">
+                    <p>Hello! 👋 Welcome to Campus Help Desk.</p>
+                    <p>I'm your virtual assistant. How can I help you today?</p>
+                    <span class="message-time">Just now</span>
+                </div>
+            </div>
+
+            <!-- Quick Questions -->
+            <div class="quick-questions">
+                <p>Suggested questions:</p>
+
+                <button class="suggestion-btn" onclick="sendSuggestion('How can I raise a complaint?')">
+                    How can I raise a complaint?
+                </button>
+
+                <button class="suggestion-btn" onclick="sendSuggestion('How can I check my complaint status?')">
+                    Check complaint status
+                </button>
+
+                <button class="suggestion-btn" onclick="sendSuggestion('Whom should I contact for Wi-Fi issues?')">
+                    Wi-Fi related issues
+                </button>
+            </div>
+
+        </main>
+
+        <!-- Message Input -->
+        <footer class="chat-input-area">
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Type your message here..."
+                autocomplete="off"
+            >
+
+            <button id="sendBtn" onclick="sendMessage()">➤</button>
+        </footer>
+
+        <p class="chat-footer-note">
+            AI Assistant • Campus Help Desk
+        </p>
+
+    </div>
+
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

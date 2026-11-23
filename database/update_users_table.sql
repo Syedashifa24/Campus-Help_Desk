@@ -1,0 +1,5 @@
+USE campus_help_desk;
+
+ALTER TABLE users
+ADD COLUMN usn VARCHAR(30) UNIQUE,
+ADD COLUMN phone VARCHAR(10);

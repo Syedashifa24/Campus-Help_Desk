@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Complaints | Campus Help Desk</title>
+    <link rel="stylesheet" href="css/my-complaints.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Campus <span>Help Desk</span></div>
+        <a href="dashboard.html" class="back-link">← Dashboard</a>
+    </header>
+
+    <main class="container">
+
+        <section class="page-heading">
+            <div>
+                <span class="tag">STUDENT PORTAL</span>
+                <h1>My Complaints</h1>
+                <p>View and track the progress of your submitted complaints.</p>
+            </div>
+
+            <a href="complaint.html" class="new-btn">+ New Complaint</a>
+        </section>
+
+        <section class="summary-cards">
+
+            <div class="summary-card">
+                <span>Total Complaints</span>
+                <h2 id="totalCount">3</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Pending</span>
+                <h2 id="pendingCount">1</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>In Progress</span>
+                <h2 id="progressCount">1</h2>
+            </div>
+
+            <div class="summary-card">
+                <span>Resolved</span>
+                <h2 id="resolvedCount">1</h2>
+            </div>
+
+        </section>
+
+        <section class="complaints-section">
+
+            <div class="section-top">
+                <div>
+                    <h2>Complaint History</h2>
+                    <p>All your submitted requests are listed below.</p>
+                </div>
+
+                <div class="filters">
+                    <input type="search" id="searchInput"
+                        placeholder="Search complaints...">
+
+                    <select id="statusFilter">
+                        <option value="All">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Resolved">Resolved</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Complaint ID</th>
+                            <th>Complaint Title</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="complaintTable">
+
+                        <tr>
+                            <td>#CHD001</td>
+                            <td>Wi-Fi not working</td>
+                            <td>Network</td>
+                            <td>20 Nov 2026</td>
+                            <td><span class="priority high">High</span></td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td><button class="view-btn" onclick="viewComplaint('CHD001')">View</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>#CHD002</td>
+                            <td>Projector issue</td>
+                            <td>Classroom</td>
+                            <td>19 Nov 2026</td>
+                            <td><span class="priority medium">Medium</span></td>
+                            <td><span class="status progress">In Progress</span></td>
+                            <td><button class="view-btn" onclick="viewComplaint('CHD002')">View</button></td>
+                        </tr>
+
+                        <tr>
+                            <td>#CHD003</td>
+                            <td>Water leakage</td>
+                            <td>Maintenance</td>
+                            <td>17 Nov 2026</td>
+                            <td><span class="priority low">Low</span></td>
+                            <td><span class="status resolved">Resolved</span></td>
+                            <td><button class="view-btn" onclick="viewComplaint('CHD003')">View</button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <p id="emptyMessage" class="empty-message" hidden>
+                No complaints found.
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="js/my-complaints.js"></script>
+</body>
+</html>

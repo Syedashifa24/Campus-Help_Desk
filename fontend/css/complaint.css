@@ -1,0 +1,309 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fc;
+    color: #202b42;
+}
+
+.page-container {
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    height: 75px;
+    background: #14213d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 7%;
+}
+
+.logo {
+    color: white;
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #65b5ff;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 16px;
+    border: 1px solid #647895;
+    border-radius: 7px;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    background: #27436d;
+}
+
+/* Main content */
+.content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 45px 25px;
+}
+
+.intro {
+    margin-bottom: 30px;
+}
+
+.tag {
+    color: #1769aa;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.intro h1 {
+    font-size: 32px;
+    margin: 12px 0;
+    color: #14213d;
+}
+
+.intro p {
+    color: #78849a;
+    font-size: 15px;
+}
+
+/* Form layout */
+.form-layout {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.form-card,
+.help-card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    box-shadow: 0 5px 25px rgba(20, 40, 80, 0.06);
+    border: 1px solid #edf0f5;
+}
+
+.form-card h2,
+.help-card h2 {
+    font-size: 21px;
+    color: #14213d;
+}
+
+.form-subtitle {
+    color: #929bad;
+    font-size: 13px;
+    margin: 8px 0 25px;
+}
+
+/* Form fields */
+.form-group {
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 9px;
+    color: #35435d;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #dce2ed;
+    border-radius: 8px;
+    outline: none;
+    background: #fbfcff;
+    color: #26334c;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #3488cf;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(52, 136, 207, 0.10);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group input[type="file"] {
+    background: #f8faff;
+    cursor: pointer;
+}
+
+.form-group small {
+    display: block;
+    color: #929bad;
+    font-size: 12px;
+    margin-top: 7px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.form-actions button {
+    padding: 13px 21px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.cancel-btn {
+    background: white;
+    border: 1px solid #dce2ed;
+    color: #53617a;
+}
+
+.cancel-btn:hover {
+    background: #f0f3f8;
+}
+
+.submit-btn {
+    background: #1769aa;
+    border: none;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #12558d;
+}
+
+/* Help card */
+.help-card {
+    background: linear-gradient(160deg, #14213d, #203e68);
+    color: white;
+    padding: 30px 25px;
+}
+
+.help-icon {
+    width: 43px;
+    height: 43px;
+    background: #31577f;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+    margin-bottom: 20px;
+    color: #83c5ff;
+}
+
+.help-card h2 {
+    color: white;
+    margin-bottom: 10px;
+}
+
+.help-card > p {
+    color: #c1cde0;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.tip {
+    display: flex;
+    gap: 13px;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.tip span {
+    color: #75baff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tip p {
+    color: #e0e8f5;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.help-note {
+    border-top: 1px solid #466080;
+    padding-top: 18px;
+    margin-top: 10px;
+    color: #a9c9ec;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* Responsive design */
+@media (max-width: 850px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 550px) {
+    .header {
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .back-link {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .content {
+        padding: 30px 15px;
+    }
+
+    .intro h1 {
+        font-size: 26px;
+    }
+
+    .form-card,
+    .help-card {
+        padding: 22px 17px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}

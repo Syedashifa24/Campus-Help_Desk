@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint Details | Campus Help Desk</title>
+    <link rel="stylesheet" href="css/complaint-details.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">Campus <span>Help Desk</span></div>
+        <a href="my-complaints.html" class="back-link">
+            ← Back to My Complaints
+        </a>
+    </header>
+
+    <main class="container">
+
+        <div class="page-heading">
+            <div>
+                <span class="tag">COMPLAINT INFORMATION</span>
+                <h1>Complaint Details</h1>
+                <p>View the details and track the progress of your request.</p>
+            </div>
+
+            <span class="complaint-id" id="complaintId">#CHD001</span>
+        </div>
+
+        <section class="details-layout">
+
+            <div class="main-card">
+
+                <div class="title-section">
+                    <div>
+                        <span class="small-label">COMPLAINT TITLE</span>
+                        <h2 id="complaintTitle">Wi-Fi not working</h2>
+                    </div>
+
+                    <span class="status pending" id="complaintStatus">
+                        Pending
+                    </span>
+                </div>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <span>Category</span>
+                        <strong id="category">Network</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Priority</span>
+                        <strong id="priority" class="high">High</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Submitted Date</span>
+                        <strong id="date">20 November 2026</strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Location</span>
+                        <strong id="location">Block A, Room 204</strong>
+                    </div>
+
+                </div>
+
+                <div class="description-section">
+                    <h3>Complaint Description</h3>
+                    <p id="description">
+                        The Wi-Fi connection in our classroom is not working
+                        properly. Students are unable to access the internet
+                        for academic activities.
+                    </p>
+                </div>
+
+                <div class="attachment-section">
+                    <h3>Attached Image</h3>
+                    <p id="attachmentText">No image attached.</p>
+                </div>
+
+            </div>
+
+            <aside class="side-card">
+
+                <h2>Complaint Progress</h2>
+                <p class="side-subtitle">Track your request status.</p>
+
+                <div class="timeline" id="timeline">
+
+                    <div class="timeline-item completed">
+                        <div class="timeline-dot">✓</div>
+                        <div>
+                            <h3>Submitted</h3>
+                            <p>Your complaint has been submitted.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item current">
+                        <div class="timeline-dot">2</div>
+                        <div>
+                            <h3>Pending</h3>
+                            <p>Waiting for the support team.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">3</div>
+                        <div>
+                            <h3>In Progress</h3>
+                            <p>Issue is being worked on.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-dot">4</div>
+                        <div>
+                            <h3>Resolved</h3>
+                            <p>Your issue has been resolved.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="support-note">
+                    <strong>Need assistance?</strong>
+                    <p>Contact the campus support team for help.</p>
+                </div>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+    <script src="js/complaint-details.js"></script>
+</body>
+</html>

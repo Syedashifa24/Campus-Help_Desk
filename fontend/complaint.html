@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raise Complaint | Campus Help Desk</title>
+    <link rel="stylesheet" href="css/complaint.css">
+</head>
+<body>
+
+    <div class="page-container">
+
+        <header class="header">
+            <div class="logo">
+                Campus <span>Help Desk</span>
+            </div>
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+        </header>
+
+        <main class="content">
+
+            <div class="intro">
+                <span class="tag">STUDENT SUPPORT</span>
+                <h1>Raise a Complaint</h1>
+                <p>Tell us about the issue. Our support team will work to resolve it.</p>
+            </div>
+
+            <div class="form-layout">
+
+                <section class="form-card">
+
+                    <h2>Complaint Details</h2>
+                    <p class="form-subtitle">Please provide the following information.</p>
+
+                    <form id="complaintForm">
+
+                        <div class="form-group">
+                            <label for="title">Complaint Title *</label>
+                            <input type="text" id="title"
+                                placeholder="Enter a short title for your issue" required>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="category">Category *</label>
+                                <select id="category" required>
+                                    <option value="">Select category</option>
+                                    <option>Classroom</option>
+                                    <option>Laboratory</option>
+                                    <option>Hostel</option>
+                                    <option>Electrical</option>
+                                    <option>Plumbing</option>
+                                    <option>Wi-Fi / Network</option>
+                                    <option>Maintenance</option>
+                                    <option>Lost and Found</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="priority">Priority *</label>
+                                <select id="priority" required>
+                                    <option value="">Select priority</option>
+                                    <option>Low</option>
+                                    <option>Medium</option>
+                                    <option>High</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Location *</label>
+                            <input type="text" id="location"
+                                placeholder="e.g. Block A, Room 204" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Describe Your Issue *</label>
+                            <textarea id="description" rows="5"
+                                placeholder="Explain the problem in detail..."
+                                required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="attachment">Attach Image (Optional)</label>
+                            <input type="file" id="attachment" accept="image/*">
+                            <small>You can upload an image of the issue.</small>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="reset" class="cancel-btn">Clear Form</button>
+                            <button type="submit" class="submit-btn">
+                                Submit Complaint →
+                            </button>
+                        </div>
+
+                    </form>
+                </section>
+
+                <aside class="help-card">
+                    <div class="help-icon">✦</div>
+                    <h2>Need Help?</h2>
+                    <p>Follow these simple tips when submitting your complaint.</p>
+
+                    <div class="tip">
+                        <span>01</span>
+                        <p>Choose the correct complaint category.</p>
+                    </div>
+
+                    <div class="tip">
+                        <span>02</span>
+                        <p>Describe the issue clearly and accurately.</p>
+                    </div>
+
+                    <div class="tip">
+                        <span>03</span>
+                        <p>Add an image if it helps explain the problem.</p>
+                    </div>
+
+                    <div class="tip">
+                        <span>04</span>
+                        <p>Select priority based on the urgency of the issue.</p>
+                    </div>
+
+                    <div class="help-note">
+                        Your complaint will be reviewed by the campus support team.
+                    </div>
+                </aside>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="js/complaint.js"></script>
+</body>
+</html>
