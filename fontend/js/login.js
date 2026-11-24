@@ -50,12 +50,20 @@ loginForm.addEventListener("submit", async function(event) {
         const data = await response.json();
 
         if (response.ok) {
+
             message.style.color = "green";
             message.textContent = "Login successful!";
 
+            // Store logged-in user details
+            localStorage.setItem("user_id", data.user_id);
+            localStorage.setItem("user_name", data.name);
+            localStorage.setItem("user_role", data.role);
+
+            // Redirect based on user role
             if (role === "student") {
                 window.location.href = "dashboard.html";
-            } else {
+            } 
+            else {
                 window.location.href = "admin-dashboard.html";
             }
 

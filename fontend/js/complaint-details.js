@@ -1,86 +1,74 @@
-// Sample complaint details
-const complaints = {
-    CHD001: {
-        title: "Wi-Fi not working",
-        status: "Pending",
-        category: "Network",
-        priority: "High",
-        date: "20 Nov 2026",
-        location: "Block A, Room 204",
-        description: "The Wi-Fi connection in our classroom is not working properly. Students are unable to access the internet for academic activities.",
-        attachment: "No attachment"
-    },
+document.addEventListener("DOMContentLoaded", async function () {
 
-    CHD002: {
-        title: "Projector issue",
-        status: "In Progress",
-        category: "Classroom",
-        priority: "Medium",
-        date: "19 Nov 2026",
-        location: "Block B, Room 105",
-        description: "The classroom projector is not displaying the presentation properly. It needs to be checked and repaired.",
-        attachment: "No attachment"
-    },
+    const userId = localStorage.getItem("user_id");
 
-    CHD003: {
-        title: "Water leakage",
-        status: "Resolved",
-        category: "Maintenance",
-        priority: "Low",
-        date: "17 Nov 2026",
-        location: "Block C, Washroom",
-        description: "There was water leakage in the washroom. The maintenance team has completed the repair.",
-        attachment: "No attachment"
-    }
-};
+    const params = new URLSearchParams(window.location.search);
+    const complaintId = params.get("id");
 
-// Get complaint ID from the URL
-const params = new URLSearchParams(window.location.search);
-const complaintId = params.get("id") || "CHD001";
+    const errorMessage = document.getElementById("errorMessage");
 
-const complaint = complaints[complaintId];
-
-// Display complaint details
-if (complaint) {
-    document.getElementById("complaintId").textContent = complaintId;
-    document.getElementById("complaintTitle").textContent = complaint.title;
-    document.getElementById("complaintStatus").textContent = complaint.status;
-    document.getElementById("category").textContent = complaint.category;
-    document.getElementById("priority").textContent = complaint.priority;
-    document.getElementById("date").textContent = complaint.date;
-    document.getElementById("location").textContent = complaint.location;
-    document.getElementById("description").textContent = complaint.description;
-    document.getElementById("attachmentText").textContent = complaint.attachment;
-
-    updateTimeline(complaint.status);
-} else {
-    document.getElementById("complaintTitle").textContent =
-        "Complaint not found";
-
-    document.getElementById("complaintId").textContent = complaintId;
-}
-
-// Update complaint progress timeline
-function updateTimeline(status) {
-    const steps = document.querySelectorAll("#timeline .timeline-item");
-
-    let currentStep = 1;
-
-    if (status === "In Progress") {
-        currentStep = 2;
-    } else if (status === "Resolved") {
-        currentStep = 3;
+    if (!userId) {
+        alert("Please login first.");
+        window.location.href = "login.html";
+        return;
     }
 
-    steps.forEach((step, index) => {
-        step.classList.remove("completed", "current");
+    if (!complaintId || !/^\d+$/.test(complaintId)) {
+        errorMessage.textContent = "Invalid complaint ID.";
+        return;
+    }
 
-        if (index < currentStep) {
-            step.classList.add("completed");
-        } else if (index === currentStep) {
-            step.classList.add("current");
+    try {
+
+        const response = await fetch(
+            `http://127.0.0.1:5000/complaint-details/${encodeURIComponent(complaintId)}/${encodeURIComponent(userId)}`
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || "Complaint not found.");
         }
-    });
-}
 
-console.log("Complaint Details page loaded successfully!");
+        document.getElementById("complaintTitle").textContent = data.title;
+        document.getElementById("complaintId").textContent =
+            "Complaint ID: #CHD" + String(data.complaint_id).padStart(3, "0");
+
+        document.getElementById("category").textContent = data.category;
+        document.getElementById("priority").textContent = data.priority;
+        document.getElementById("location").textContent = data.location;
+        document.getElementById("description").textContent = data.description;
+
+        const date = new Date(data.created_at);
+
+        document.getElementById("createdAt").textContent =
+            isNaN(date.getTime()) ? "Not available" :
+            date.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+
+        const statusElement = document.getElementById("complaintStatus");
+        statusElement.textContent = data.status;
+
+        statusElement.className = "status";
+
+        const status = String(data.status || "").trim().toLowerCase();
+
+        if (status === "pending") {
+            statusElement.classList.add("pending");
+        } else if (status === "in progress") {
+            statusElement.classList.add("progress");
+        } else if (status === "resolved") {
+            statusElement.classList.add("resolved");
+        }
+
+    } catch (error) {
+
+        console.error("Complaint Details Error:", error);
+        errorMessage.textContent = error.message;
+
+    }
+
+});

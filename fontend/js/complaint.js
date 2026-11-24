@@ -2,11 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const complaintForm = document.getElementById("complaintForm");
 
-    complaintForm.addEventListener("submit", function (event) {
+    complaintForm.addEventListener("submit", async function (event) {
 
         event.preventDefault();
 
-        // Get form values
         const title = document.getElementById("title").value.trim();
         const category = document.getElementById("category").value;
         const priority = document.getElementById("priority").value;
@@ -14,28 +13,53 @@ document.addEventListener("DOMContentLoaded", function () {
         const description = document.getElementById("description").value.trim();
         const attachment = document.getElementById("attachment").files[0];
 
-        // Validate form
         if (!title || !category || !priority || !location || !description) {
             alert("Please fill in all required fields.");
             return;
         }
 
-        // Check image type
         if (attachment && !attachment.type.startsWith("image/")) {
             alert("Please upload a valid image file.");
             return;
         }
 
-        // Show success message
-        alert(
-            "Complaint submitted successfully!\n\n" +
-            "Title: " + title + "\n" +
-            "Category: " + category + "\n" +
-            "Priority: " + priority
-        );
+        const user_id = localStorage.getItem("user_id");
 
-        // Clear form
-        complaintForm.reset();
+        if (!user_id) {
+            alert("Please login again before submitting a complaint.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        try {
+            const response = await fetch("http://127.0.0.1:5000/complaints", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: user_id,
+                    title: title,
+                    category: category,
+                    priority: priority,
+                    location: location,
+                    description: description
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+                complaintForm.reset();
+            } else {
+                alert(data.message || "Unable to submit complaint.");
+            }
+
+        } catch (error) {
+            alert("Cannot connect to the backend. Please check whether Flask is running.");
+            console.error(error);
+        }
 
     });
 

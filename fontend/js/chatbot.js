@@ -1,23 +1,20 @@
 const chatArea = document.getElementById("chatArea");
 const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("sendBtn");
 
-// Display a message in the chat
+// Display messages
 function addMessage(message, sender) {
     const messageDiv = document.createElement("div");
-    messageDiv.classList.add("message", sender + "-message");
-
-    const avatar = document.createElement("div");
-    avatar.classList.add("message-avatar");
-    avatar.textContent = sender === "bot" ? "AI" : "You";
+    messageDiv.className = "message " + sender + "-message";
 
     const content = document.createElement("div");
-    content.classList.add("message-content");
+    content.className = "message-content";
 
     const paragraph = document.createElement("p");
     paragraph.textContent = message;
 
     const time = document.createElement("span");
-    time.classList.add("message-time");
+    time.className = "message-time";
     time.textContent = new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit"
@@ -27,74 +24,83 @@ function addMessage(message, sender) {
     content.appendChild(time);
 
     if (sender === "bot") {
+        const avatar = document.createElement("div");
+        avatar.className = "message-avatar";
+        avatar.textContent = "AI";
+
         messageDiv.appendChild(avatar);
-        messageDiv.appendChild(content);
-    } else {
-        messageDiv.appendChild(content);
     }
 
+    messageDiv.appendChild(content);
     chatArea.appendChild(messageDiv);
+
     chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-// Find an answer to the student's question
+// Generate chatbot response
 function getBotResponse(question) {
-    const text = question.toLowerCase();
 
-    if (text.includes("hello") || text.includes("hi") ||
-        text.includes("hey")) {
+    const text = question.toLowerCase().trim();
+
+    if (/\b(hi|hello|hey)\b/.test(text)) {
         return "Hello! Welcome to Campus Help Desk. How can I assist you?";
     }
 
-    if (text.includes("raise") || text.includes("submit") ||
-        text.includes("register complaint")) {
-        return "To raise a complaint, open your Student Dashboard and click the Raise Complaint option. Enter the issue details, select a category and priority, and submit the form.";
+    if (/\b(raise|submit|register|file)\b/.test(text) &&
+        /\b(complaint|issue|problem|request)\b/.test(text)) {
+        return "To raise a complaint, open your Student Dashboard and click Raise Complaint. Enter the title, category, priority, location and description, then submit the form.";
     }
 
-    if (text.includes("status") || text.includes("track") ||
-        text.includes("check complaint")) {
-        return "You can check your complaint status by opening My Complaints from your Student Dashboard. Click the View button to see the complaint details and progress.";
+    if (/\b(status|track|progress)\b/.test(text)) {
+        return "Open My Complaints from your Student Dashboard. You can view your complaint status and click View to check its details.";
     }
 
-    if (text.includes("wifi") || text.includes("internet") ||
-        text.includes("network")) {
-        return "For Wi-Fi or internet problems, raise a complaint under the Network category. Mention your block, room number and the issue clearly.";
+    if (/\b(wifi|internet|network)\b/.test(text)) {
+        return "For Wi-Fi or internet problems, raise a complaint under the Network category. Mention your block, room number and issue clearly.";
     }
 
-    if (text.includes("water") || text.includes("plumbing") ||
-        text.includes("leakage")) {
-        return "For water leakage or plumbing problems, submit a complaint under the Maintenance category with the exact location and issue details.";
+    if (/\b(water|plumbing|leakage|tap)\b/.test(text)) {
+        return "For water leakage or plumbing problems, raise a complaint under Maintenance and mention the exact location.";
     }
 
-    if (text.includes("electricity") || text.includes("electrical") ||
-        text.includes("light") || text.includes("fan")) {
-        return "For electrical problems such as lights, fans or power supply, raise a complaint under the Maintenance category and mention the location.";
+    if (/\b(electricity|electrical|light|fan|power)\b/.test(text)) {
+        return "For electrical problems such as lights, fans or power supply, select Maintenance and describe the issue and location.";
     }
 
-    if (text.includes("classroom") || text.includes("projector") ||
-        text.includes("lab")) {
-        return "For classroom, projector or laboratory issues, select the appropriate category while raising your complaint. Include the room or lab number.";
+    if (/\b(classroom|projector|laboratory|lab)\b/.test(text)) {
+        return "For classroom or laboratory problems, select the appropriate category and mention the classroom or lab number.";
     }
 
-    if (text.includes("resolved") || text.includes("pending") ||
-        text.includes("progress")) {
-        return "Your complaint status can be Pending, In Progress or Resolved. Open My Complaints to check the latest status.";
+    if (/\b(lost|found|missing)\b/.test(text)) {
+        return "For lost and found items, raise a complaint under the Lost and Found category. Include the item's description and location.";
     }
 
-    if (text.includes("thank")) {
-        return "You're welcome! I'm happy to help. Have a great day!";
+    if (/\b(pending|resolved|in progress)\b/.test(text)) {
+        return "Pending means your complaint is waiting for action. In Progress means it is being handled. Resolved means the issue has been addressed.";
     }
 
-    if (text.includes("contact") || text.includes("help") ||
-        text.includes("support")) {
-        return "You can submit your issue through the Campus Help Desk. The help-desk staff will review and handle your request.";
+    if (/\b(priority|urgent|emergency)\b/.test(text)) {
+        return "Choose the priority according to the seriousness of your issue. Use High for urgent problems and Low for minor issues.";
     }
 
-    return "Sorry, I couldn't understand your question. Please try asking about raising complaints, checking status, Wi-Fi issues, classroom problems or maintenance.";
+    if (/\b(contact|admin|support|help)\b/.test(text)) {
+        return "You can submit your issue through Campus Help Desk. The administrator or help-desk staff will review and handle your request.";
+    }
+
+    if (/\b(thank|thanks)\b/.test(text)) {
+        return "You're welcome! Happy to help. Have a great day!";
+    }
+
+    if (/\b(bye|goodbye)\b/.test(text)) {
+        return "Goodbye! Thank you for using Campus Help Desk.";
+    }
+
+    return "Sorry, I couldn't understand your question. You can ask me about raising complaints, checking status, Wi-Fi, electricity, classrooms, maintenance or lost and found.";
 }
 
-// Send a message
+// Send message
 function sendMessage() {
+
     const message = userInput.value.trim();
 
     if (message === "") {
@@ -103,20 +109,24 @@ function sendMessage() {
 
     addMessage(message, "user");
     userInput.value = "";
+    userInput.focus();
+
+    sendBtn.disabled = true;
 
     setTimeout(function () {
         const response = getBotResponse(message);
         addMessage(response, "bot");
-    }, 500);
+        sendBtn.disabled = false;
+    }, 400);
 }
 
-// Send suggested questions
+// Suggested questions
 function sendSuggestion(question) {
     userInput.value = question;
     sendMessage();
 }
 
-// Send message when Enter key is pressed
+// Enter key support
 userInput.addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         sendMessage();
