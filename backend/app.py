@@ -34,7 +34,7 @@ def get_db_connection():
 
     return mysql.connector.connect(
         host="localhost",
-        user="campus_app",
+        user="root",
         password=DB_PASSWORD,
         database="campus_help_desk"
     )
